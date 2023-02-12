@@ -10,7 +10,6 @@ import { sendCartData } from "./store/cart-actions";
 let initialRun = true;
 
 function App() {
-  const [notifIsShown, setNotiIsShown] = useState(true);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { notification } = useSelector((state) => state.ui);
@@ -26,7 +25,6 @@ function App() {
       return;
     }
     if (cart.changed) {
-      setNotiIsShown(true);
       dispatch(
         //not sending the entire cart object bcz it would include the "changed" field as well.
         sendCartData({ items: cart.items, totalQuantity: cart.totalQuantity })
@@ -40,8 +38,9 @@ function App() {
     <Fragment>
       {notification && (
         <Notification
-          setIsShown={setNotiIsShown}
-          isShown={notifIsShown}
+          // setIsShown={setNotiIsShown}
+          // isShown={notifIsShown}
+          cart={cart}
           status={notification.status}
           title={notification.title}
           message={notification.message}

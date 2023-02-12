@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import classes from "./Notification.module.css";
 
 const Notification = (props) => {
-  const { isShown, setIsShown } = props;
+  const [isShown, setIsShown] = useState(true);
+  const { cart } = props;
+
   useEffect(() => {
+    setIsShown(true);
     const timeId = setTimeout(() => {
       setIsShown(false);
-    }, 5000);
+    }, 2000);
     return () => {
       clearTimeout(timeId);
     };
-  });
+  }, [cart]);
 
   let specialClasses = "";
 
@@ -33,8 +36,6 @@ const Notification = (props) => {
   if (!isShown) {
     notificationContent = null;
   }
-
-  console.log(isShown);
   return notificationContent;
 };
 
